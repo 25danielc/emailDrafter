@@ -1,0 +1,296 @@
+﻿title,source_kind,suggested_action,existing_helpsdocs_url,grounded_in,product,solution_type,keywords,created_date,record_external_id,body
+Flow error: sObject type 'SDOC__SDTemplate__c' not supported,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/installation/permission-sets/,"web-research seed 2026-07-16 (medium confidence); sources: https://unofficialsf.com/pauple_helpie/flow-and-security/, https://kb.sdocs.com/knowledge-base/sdocs/installation/permission-sets/",S-Docs,procedure,sObject type 'SDOC__SDTemplate__c' is not supported flow Get Records S-Docs template object access permission set SDocs User license user mode INVALID_TYPE,2026-07-16,case-mined:seed:sdtemplate-not-supported,"Problem
+A Salesforce Flow that creates S-Docs jobs or reads S-Docs templates fails at runtime with an error containing: sObject type 'SDOC__SDTemplate__c' is not supported.
+
+Cause
+Flows access data in user mode. The ""sObject type '<object>' is not supported."" error occurs when a Flow attempts to retrieve a record and the profile of the running user does not have access to that record's object type. Here the running user (often an automation, integration, or Email-to-Case user rather than the flow author) lacks object access to the S-Docs template object SDOC__SDTemplate__c, typically because they have not been assigned an S-Docs license and/or an S-Docs permission set.
+
+Resolution
+1. Identify the user the flow actually runs as (for record-triggered or automated flows this is the user whose action triggered it, not the admin who built it).
+2. Assign that user an S-Docs license: Setup > Installed Packages > locate the S-Docs package > Manage Licenses > Add Users > select the user > Add. Note: license seats do not need to be assigned for Site Licenses or sandboxes.
+3. Assign an S-Docs permission set to the user: ""SDocs User"" (grants internal users access to generate documents and insert S-Docs Jobs) or ""SDocs Administrator"" (grants SDoc access including template editor and SDocs Setup).
+4. Verify the user now has read access to the SDoc Template object (SDOC__SDTemplate__c) and re-run the flow."
+S-Docs install/upgrade fails with ContentDistribution error,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/installation/content-delivery-requirements-for-the-fall-2024-release-and-on/,web-research seed 2026-07-16 (high confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/installation/content-delivery-requirements-for-the-fall-2024-release-and-on/,S-Docs,procedure,"Invalid type: ContentDistribution Invalid initializer type List<ContentDistribution> found for Map<Id,SObject> S-Docs install upgrade fail Content Deliveries Public Links Fall 24 8.0",2026-07-16,case-mined:seed:contentdistribution-invalid-type,"Problem
+Installing or upgrading the S-Docs package (Fall '24 / 8.0 release and later) fails with an error referencing the ContentDistribution object, such as: ""Invalid initializer type List<ContentDistribution> found for Map<Id, SObject>"" (also reported as ""Invalid type: ContentDistribution"").
+
+Cause
+The S-Docs Fall '24 release and all subsequent versions depend on the Salesforce ContentDistribution object, which only exists when the org's Content Deliveries and Public Links feature is enabled. If that feature is disabled, the package cannot be installed or upgraded and the install fails with an error referencing ContentDistribution.
+
+Resolution
+1. In Salesforce Setup, enable the Content Deliveries and Public Links feature (see Salesforce Help: Set Up Content Deliveries).
+2. Retry the S-Docs install or upgrade - once the feature is enabled, installation/upgrade should complete without the error.
+3. If the feature is already enabled and the error persists, contact support@sdocs.com."
+"Upgrading S-Docs/S-Sign across versions: path, links, and prerequisites",web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/installation/release-best-practices-how-to-install-s-docs-upgrades-seamlessly/,"web-research seed 2026-07-16 (medium confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/installation/release-best-practices-how-to-install-s-docs-upgrades-seamlessly/, https://kb.sdocs.com/knowledge-base/sdocs/installation/download-sdocs-upgrades/",,procedure,S-Docs upgrade path skip versions intermediate version patch upgrade AppExchange Get It Now Try It cannot roll back downgrade do not uninstall release notes latest version upgrade links,2026-07-16,case-mined:seed:skip-version-upgrade,"Problem
+You are on an older S-Docs/S-Sign version (possibly several major releases behind) and need to upgrade: are intermediate versions required, and where do you get upgrade links?
+
+Cause
+S-Docs upgrades install the latest version directly from the Salesforce AppExchange over the existing package; there is no general requirement to step through every intermediate major version. However, specific releases have documented patch prerequisites - e.g., before upgrading to the February '24 S-Sign release, a patch upgrade is required when transitioning from the September/October/November '23 versions (patch package links are published in the release notes).
+
+Resolution
+1. Download the latest version from the Salesforce AppExchange S-Docs listing - click ""Get It Now"" for production or ""Try It"" for a sandbox.
+2. Before upgrading, check the S-Docs release notes (sdocs.com/resources/release-notes) for version-specific prerequisites; some releases require installing a patch first when coming from specific prior versions.
+3. Strongly recommended: test the new version in a sandbox before upgrading production.
+4. Do NOT uninstall your current version - install the new version over it; all templates and documents generated with previous versions remain after upgrade.
+5. Be aware that after you upgrade, you cannot roll back or downgrade to the previously installed version in any type of org.
+6. For upgrade questions or help identifying the right path from your current version, contact your Customer Success Manager or S-Docs support."
+Salesforce External Client Apps change and the S-Sign Connected App,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/ssign/install-configure-ssign/create-an-s-docs-connected-app-for-s-sign/,"web-research seed 2026-07-16 (medium confidence); sources: https://kb.sdocs.com/knowledge-base/ssign/install-configure-ssign/create-an-s-docs-connected-app-for-s-sign/, https://help.salesforce.com/s/articleView?language=en_US&id=xcloud.connected_app_to_external_client_app_migration.htm&type=5",,explainer,External Client Apps ECA Connected App migration Spring 26 Sdocs Connected Apps Sdocs_Connected_Apps SDocsCert Migrate to External Client App consumer key preserved S-Sign OAuth connected app creation disabled,2026-07-16,case-mined:seed:external-client-apps-migration,"Problem
+What must be done about Salesforce's transition from Connected Apps to External Client Apps (ECAs), given that S-Sign relies on a Connected App (""Sdocs Connected Apps"") in the org?
+
+Cause
+External Client Apps are Salesforce's next generation of connected apps; starting with Spring '26, creation of NEW Connected Apps is disabled by default, while existing Connected Apps keep working. The S-Sign Connected App (API name ""Sdocs_Connected_Apps"", with the SDocsCert certificate) is created locally by the customer's admin in their own org - it is not delivered inside the managed package.
+
+Resolution
+1. No immediate breakage: existing Connected Apps, including an already-configured ""Sdocs Connected Apps"", continue to work - Salesforce states existing Connected Apps remain supported.
+2. If you choose to migrate: because the S-Sign Connected App is a local (customer-created) connected app, it is eligible for Salesforce's automated migration - in App Manager, use ""Migrate to External Client App""; migration preserves the consumer key and secret, so existing integrations continue to work without updating credentials.
+3. After migrating, do NOT delete the original connected app - Salesforce saves the original as a read-only version and both apps share the same consumer.
+4. Note: External Client Apps do not support the Username-Password or User-Agent OAuth flows.
+5. Confirm current vendor guidance with S-Docs support before migrating, as the S-Docs Connected App setup article does not yet reference External Client Apps."
+Generated PDF looks different from the original Word document,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/creating-templates/import-word-templates-into-s-docs/,"web-research seed 2026-07-16 (medium confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/creating-templates/import-word-templates-into-s-docs/, https://kb.sdocs.com/knowledge-base/sdocs/understanding-template-formats/s-docs-limitations/",S-Docs,procedure,S-Docs PDF looks different Word DOCX formatting fidelity Paste From Word Times New Roman default font windowtext table columns misaligned PDF 1.4 CSS 2.1 Arial Unicode MS unsupported fonts headers footers checkboxes,2026-07-16,case-mined:seed:docx-pdf-fidelity,"Problem
+A PDF generated by S-Docs from a template built from a Microsoft Word document (imported via Paste From Word) looks different from the original Word/DOCX file: fonts change, table columns misalign, colors are lost, and headers/footers, checkboxes, or images are missing or wrong.
+
+Cause
+Complex formatting may not carry over perfectly into the S-Docs template editor even with Paste From Word, and the S-Docs PDF rendering engine has documented constraints: it renders PDF version 1.4, PDF templates support CSS 2.1 only, and supported PDF fonts are limited (Arial Unicode MS, sans-serif, serif, Times New Roman, Courier). Fonts carried over from a Word template default to Times New Roman when not PDF-supported; Word ""windowtext"" color references do not work for non-DOC output; table columns can look aligned in the editor but not in the output; bold/italic/underline is not supported in PDFs using Unicode fonts.
+
+Resolution
+1. Change any template fonts that are not PDF-supported to a supported font (Arial Unicode MS, sans-serif, serif, Times New Roman, Courier) - otherwise they default to Times New Roman at generation.
+2. Remove or replace ""windowtext"" color references carried over from Word; they do not work for PDF output.
+3. Verify and fix table column alignment in the template editor - alignment in the editor does not guarantee alignment in the output document.
+4. After pasting from Word, manually re-add headers and footers (copy them separately into the S-Docs header/footer tabs), replace Word checkboxes with S-Docs methods, and replace images with S-Docs image code.
+5. If using Unicode fonts, avoid relying on bold/italic/underline in PDF output.
+6. If you need a true native Word file as output, use a DOCX template (generates DOCX); for data-driven PDF output, build the template in the S-Docs template editor rather than expecting a 1:1 conversion of the Word file."
+Inserting JPG/JPEG and other images into S-Docs PDF templates,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/images/embed-static-images/,"web-research seed 2026-07-16 (high confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/images/add-dynamic-images/, https://kb.sdocs.com/knowledge-base/sdocs/images/pull-image-attachments-and-generate-pdfs/, https://kb.sdocs.com/knowledge-base/sdocs/images/embed-static-images/",S-Docs,procedure,sdocs image jpg jpeg png insert pdf template add image button rich text field contains rich text remote site setting attachment lineitemsSOQL broken image rendering,2026-07-16,case-mined:seed:jpg-in-pdf-rendering,"Problem
+Does S-Docs support JPG/JPEG images in PDF templates, and how do you embed images so they render correctly in the generated PDF?
+
+Resolution
+Yes - S-Docs supports images (including JPEG) in PDF templates via several documented methods.
+1. Static image: click the Add Image button on the template editor toolbar, then either click Browse Server to pick an image from your Salesforce Documents folder or paste the image URL into the Image Properties window. Static resources can be referenced with <img src=""/resource/STATIC_RESOURCE_API_NAME/PATH_TO_IMAGE"" />.
+2. Dynamic image from a rich text field: upload the image to a Salesforce rich text field on the record, then in the template editor click Insert Field, select the field, check the 'Contains Rich Text' checkbox, and click Insert (the merge field renders with triple braces, e.g. {{{!Product2.ProductImage__c}}}).
+3. Image attachments on the record: use a lineitemsSOQL block that selects Attachment records (e.g. filtering ContentType LIKE '%jpeg') and renders each as <img src='/servlet/servlet.FileDownload?file=...' /> - this merges IMAGES only; it cannot merge PDF files into your S-Docs PDF.
+4. Important: if the image is hosted outside Salesforce, you must create a Remote Site Setting for the image URL's domain, or the generated PDF will show a broken image icon."
+Reporting S-Docs document-generation usage per user,web-researched-seed,update existing page,https://kb.sdocs.com/faq/,"web-research seed 2026-07-16 (medium confidence); sources: https://kb.sdocs.com/faq/, https://kb.sdocs.com/knowledge-base/sdocs/generate-documents-automatically/s-docs-jobs/",S-Docs,procedure,sdocs usage report per user count documents generated SDOC__SDoc__c sdoc object created by salesforce report metrics sdjob envelopes used how many,2026-07-16,case-mined:seed:per-user-usage-reporting,"Problem
+How can you report on S-Docs usage - who generated how many documents, and when?
+
+Resolution
+S-Docs is 100% native to Salesforce and every generated document is stored as a record in your org (the S-Doc object, SDOC__SDoc__c); generated documents also appear in an S-Docs related list on the base record. Because generated documents are ordinary Salesforce records, per-user usage reporting is done with standard Salesforce reporting:
+1. Build a report (or custom report type) on the S-Doc object.
+2. Group by Created By and Created Date to count documents generated per user over a period.
+3. When S-Docs saves output as a Salesforce Attachment or File, it populates the ContentVersion Description field with the ID of the corresponding S-Doc record, which lets you reconcile Files against S-Doc records.
+4. For automated generation, S-Doc Job records (SDOC__SDJob__c) hold execution details that can also be reported on."
+Customizing the S-Sign email sent to the next signer in a sequence,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/ssign/create-and-manage-ssign-templates/using-custom-s-sign-email-notification-templates/,"web-research seed 2026-07-16 (high confidence); sources: https://kb.sdocs.com/knowledge-base/ssign/create-and-manage-ssign-templates/using-custom-s-sign-email-notification-templates/, https://kb.sdocs.com/knowledge-base/ssign/create-and-manage-ssign-templates/s-sign-signer-profiles/",S-Sign,procedure,s-sign custom email notification template next signer multi-signer sequence partial confirmation SIGN_LINK NUM_SIGNERS_REMAINING notification settings signer profiles signing order,2026-07-16,case-mined:seed:next-signer-email-template,"Problem
+In a multi-signer S-Sign sequence, how do you customize the email/notification template that goes to the next signer (and the partial-confirmation email sent while signers remain)?
+
+Resolution
+S-Sign lets you replace its automatic emails with custom S-Docs HTML email templates.
+1. Permissions: in Salesforce Setup, open the S-Sign Internal User's profile and under Custom Object Permissions ensure 'Modify All' is enabled for S-Docs, S-Docs Fields, and S-Docs Relationships.
+2. Create the custom email as a new S-Docs template: set Related To Type to the same base object as your S-Sign PDF template and set the template format to HTML.
+3. Use S-Sign email merge fields in the body, including [[SIGNER_NAME]], [[SIGNER_EMAIL]], [[SIGNER_NUMBER]], [[NUM_SIGNERS_REMAINING]] (useful for partial confirmations), [[SIGN_LINK]] (the link the recipient clicks to sign, e.g. <a href=""[[SIGN_LINK]]"" target=""_blank"">Click Here to Sign</a>), [[DOCUMENT_NAME]], and [[CREATED_DATE]].
+4. Assign it: open your S-Sign-enabled PDF template, go to the S-Sign panel (under the S-Sign Template Settings tab), open S-Sign Notification Settings, and paste the custom HTML template's ID into the relevant field. The 'Partial Confirmation' email is sent to a signer after they submit while additional signers still need to sign; you can also specify a custom template ID for the e-signature request email used when 'Enable Send Email After First Signer' or 'Enable Send Email After Specified Signer Signs' is enabled - this customizes the request that reaches the next signer.
+5. Signer order itself is set per signer profile in the S-Sign Signer Profiles menu."
+Positioning and aligning a logo in an S-Docs template header,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/creating-templates/overview-the-s-docs-template-editor/,"web-research seed 2026-07-16 (medium confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/creating-templates/overview-the-s-docs-template-editor/, https://kb.sdocs.com/knowledge-base/sdocs/images/embed-static-images/",S-Docs,procedure,sdocs logo header image alignment position template editor add image browse server use first page header for all pages remote site setting align center placement,2026-07-16,case-mined:seed:logo-positioning,"Problem
+How do you place a logo image in an S-Docs template header and control its alignment and position?
+
+Resolution
+1. Open the template in the S-Docs template editor and go to the Header tab (Header and Footer work identically). Each has two sections - 'Header on First Page' and 'Header on Remaining Pages' - each with the same WYSIWYG editor as the Template Body tab.
+2. To show the same header on every page, design it in 'Header on First Page' and check 'Use First Page Header/Footer for All Pages'; uncheck it to use a different first-page header.
+3. Insert the logo with the Add Image button on the toolbar: click Browse Server to select an image from your Salesforce Documents folder, or paste an image URL into the Image Properties window. Static resources can be referenced with <img src=""/resource/STATIC_RESOURCE_API_NAME/PATH_TO_IMAGE"" />.
+4. Use the toolbar alignment tools (left/center/right) to align the logo; toolbar edits update the underlying HTML, so you can also fine-tune the <img> markup in the source editor.
+5. If the logo is hosted outside Salesforce, create a Remote Site Setting for its domain or the generated PDF shows a broken image icon.
+6. For DOC-format templates, size images with a style attribute (<img src=""..."" style=""height:...px; width:...px;"" />) rather than height/width attributes."
+UI Sort Persistence in Generated Tables,production-mined,author new page,,"00026461, 00026028",S-Docs,procedure,sdocs s-sign sort order persistence related list query,2026-07-16,case-mined:seed:ui-sort-persistence-tables,"Problem
+Generated documents do not reflect the sort order of related lists without manual intervention.
+
+Cause
+The list sorting on the record only affects the list view and does not automatically sync to the generated document.
+
+Resolution
+1. Update the query in your S-Docs template to include an clause that specifies the desired sort column, such as Total price."
+"S-Docs for HubSpot: features, plans, and differences from the Salesforce edition",web-researched-seed,author new page,,"web-research seed 2026-07-16 (low confidence); sources: https://www.sdocs.com/products/hubspot-document-automation, https://ecosystem.hubspot.com/marketplace/listing/sdocs-document-automation-esignature",,explainer,sdocs hubspot edition features pricing plans e-signature template editor drag and drop workflows batch conditional logic vs salesforce marketplace paid plan free trial access,2026-07-16,case-mined:seed:hubspot-edition-access,"Problem
+What does S-Docs for HubSpot include, what editions/plans exist, and what should customers expect compared to the Salesforce edition?
+
+Resolution
+S-Docs for HubSpot is a separate product with its own knowledge base (sdocs.com/knowledge-base/sdocs-hubspot). Documented capabilities: generate documents automatically from live HubSpot data, a drag-and-drop template editor, e-signatures integrated with HubSpot, workflow automation for multi-step document processes, plus batch processing and conditional logic. Its template editor works differently from the Salesforce edition's - images/headers are inserted via a context menu (+ symbol), variables are added with the '@' shortcut or drag-and-drop, and line-item table rows are reordered by dragging in a right sidebar.
+Plans: S-Docs does not publish a fixed edition matrix for HubSpot - pricing is tiered and quoted per customer; the HubSpot Marketplace listing shows a single 'S-Docs Paid Plan' with a 14-day free trial that requires an S-Docs Document Automation subscription in addition to HubSpot. No official published comparison of HubSpot-edition vs Salesforce-edition feature access exists; confirm specific feature availability and volumes with S-Docs when quoting."
+S-Docs error: SDCreate3 initialization error: Document limit has been reached,web-researched-seed,update existing page,https://kb.sdocs.com/faq/,"web-research seed 2026-07-16 (medium confidence); sources: https://kb.sdocs.com/faq/, https://kb.sdocs.com/knowledge-base/sdocs/installation/install-and-renew-your-sdocs-license-key/",S-Docs,procedure,SDCreate3 initialization error Document limit has been reached S-Docs document generation limit free edition 150 documents license key KEY ACCEPTED upgrade paid edition entitlement,2026-07-16,case-mined:seed:document-limit-reached,"Problem
+When generating a document, the S-Docs generation page fails immediately with the error ""SDCreate3 initialization error: Document limit has been reached."" No document is produced.
+
+Cause
+This is an edition/entitlement limit on the number of documents generated, not a Salesforce storage or template-size limit. The free edition of S-Docs allows generating up to 150 documents and requesting up to 50 e-Signatures, while paid editions allow unlimited document generation. The error occurs when the org's document-generation entitlement is exhausted (free/trial edition cap reached, or on legacy pre-Fall-'24 versions, a missing/expired license key leaving the org on free-edition limits).
+
+Resolution
+1. Confirm which S-Docs edition the org is on: the free edition is capped at 150 generated documents; paid editions have unlimited document generation.
+2. If the org is on the free edition and has hit the cap, the fix is upgrading to a paid S-Docs edition - this requires contacting S-Docs; there is no customer-side setting that raises the limit.
+3. If the org runs a legacy S-Docs version (before the Fall '24 / 8.0 release) that still uses license keys and you have received a new/renewed key, install it: App Launcher > S-Docs Templates > open the License Key template > Edit > delete the text in the Document Version field and replace it with the new license key; the field shows ""***KEY ACCEPTED***"" on success. Subscriptions purchased after the Fall '24 (8.0) release no longer use license keys.
+4. To verify usage against your entitlement, contact S-Docs support with your org ID (there is no publicly documented self-service usage counter)."
+Clone S-Docs templates and migrate templates between orgs (sandbox to production,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/managing-templates/moving-templates-from-sandbox-to-production/,"web-research seed 2026-07-16 (high confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/managing-templates/moving-templates-from-sandbox-to-production/, https://kb.sdocs.com/knowledge-base/sdocs/managing-templates/import-individual-templates-into-sdocs/",S-Docs,procedure,clone S-Docs template copy template migrate templates sandbox to production Template Migrator SDOC__SDMigrate Generate Export Zip Org_Agnostic_ID__c Export Template Advanced Options import,2026-07-16,case-mined:seed:template-cloning,"Problem
+You need to copy an S-Docs template - either duplicate it within the same org, or move templates between orgs (e.g., sandbox to production) without rebuilding them.
+
+Resolution
+Single template export/import (recommended for fewer than ~15 templates; also produces a clone when re-imported into the same org):
+1. Open the source template in the S-Docs Template Editor, go to the Advanced Options tab, and use Export Template - click Generate to produce a string of importable template data (DOCX attachments are included, and S-Sign data is preserved for S-Sign-enabled templates).
+2. In the target org (or same org, for a clone): App Launcher > S-Docs > Templates tab > New.
+3. Give the template any name and click Save (fields entered here are overridden on import).
+4. On the template detail page, click Template Editor.
+5. Paste the exported template data into the Template Body tab.
+6. Click Save - S-Docs decodes the data and populates all template fields automatically.
+Bulk migration with the S-Docs Template Migrator (best practice for many templates):
+1. Requirements: S-Docs 4.210+; S-Sign 2.78+ if migrating S-Sign-enabled templates.
+2. Open the migrator: on S-Docs 4.381+, App Launcher > S-Docs Setup > 'Migrate S-Docs & S-Sign Templates' > Go To S-Docs Migration Page; on earlier versions, append /apex/SDOC__SDMigrate to your Salesforce URL.
+3. Export: enter SOQL filters to select templates, click Set Export Filters, use the checkboxes to include/exclude templates, then click Generate Export Zip. Filter out templates named 'License Key' or 'License Data'.
+4. Import into the target org: on the migration page click Choose File, select the .zip, optionally check 'Set SDOC Template Values?' to modify field data on import, then click Start Import.
+5. Duplicate handling: the migrator uses the Org_Agnostic_ID__c field, which does not change across orgs, so re-migrating updates the existing production template instead of inserting a duplicate.
+6. Caveat: migrated production templates can still reference sandbox data (e.g., image URLs); point image references at production URLs and recreate any sandbox-hosted assets in production."
+S-Docs Jobs not completing: diagnosing stuck or incomplete job statuses,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/generate-documents-automatically/s-docs-jobs/,web-research seed 2026-07-16 (medium confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/generate-documents-automatically/s-docs-jobs/,S-Docs,procedure,S-Docs Job stuck incomplete Pending File Creation Status Details Queued 45 jobs Retry re-run failed job Error Run As User Failed SDJob scheduled document job not completing,2026-07-16,case-mined:seed:incomplete-receipt-jobs,"Problem
+Automated S-Docs Jobs (e.g., scheduled/receipt document generation) sit in a non-final status and never reach ""Completed"".
+
+Cause
+Documented causes of jobs sitting in a non-final state: (1) queuing - ""Queued"" means the job is waiting on another job; by default 45 jobs are processed at a time; (2) the job stalled at a processing stage - numeric statuses 0 (record created), 10/20 (Run As User callout in progress/completed), 35 (concurrent job splitter processing), 40 (S-Doc record being created), 60 (S-Doc created), 80 (Attachment/File being created and email being sent), 90 (File created; S-Sign envelope being created/emailed) show exactly where processing stopped; (3) file-creation batching - ""Pending File Creation"" applies to batches of File-enabled S-Docs created by the same user in a single transaction; (4) failure - ""Error"" (check the Status Details field) or ""Error (Run As User Failed)"" (the Run As User callout failed).
+
+Resolution
+1. Open the stuck S-Doc Job record and read the Status field to identify the stage (statuses run from Selected/Queued through numeric stages 0-90 to Completed, Retry, Error, Error (Run As User Failed), Pending File Creation).
+2. Check the Status Details field - it provides in-depth details about each stage of the job's status and explains job errors.
+3. If the status is Queued, the job is waiting on other jobs: by default 45 jobs are processed at a time, so allow the queue to drain before treating it as stuck.
+4. If the status is Retry, S-Docs is automatically re-running the failed job - it may retry up to 3 times depending on the cause; wait for retries to finish.
+5. If the status is Error (Run As User Failed), the Run As User callout failed - review Status Details for the reason.
+6. If a job remains in a non-final state after the automatic retries and queue processing, capture the Status and Status Details values and contact S-Docs support."
+Table formatting rules and limitations in S-Docs DOCX templates,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/understanding-template-formats/docx-templates/,"web-research seed 2026-07-16 (medium confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/understanding-template-formats/docx-templates/, https://kb.sdocs.com/knowledge-base/sdocs/creating-templates/upload-templates-from-microsoft-word-with-the-docx-feature/, https://kb.sdocs.com/knowledge-base/sdocs/formatting-data/advanced-template-features/",S-Docs,procedure,sdocs docx template table related list formatting lineitems tableformat styling table odd even row class none column limits word upload,2026-07-17,case-mined:seed:docx-table-formatting,"Problem
+Tables in an uploaded DOCX template render with formatting issues, or a related-list table does not come out as expected in the generated document.
+
+Cause
+DOCX templates are built in Microsoft Word and uploaded to S-Docs, so dynamic tables must follow S-Docs' documented structure and special bracketed syntax. DOCX has documented limits: related lists are restricted to simpler implementations, and DOCX is not ideal for documents that must merge complex related lists or rich text.
+
+Resolution
+1. Build related-list tables exactly as documented: create a prebuilt 'styling' table in Word with a header row (your column names), one 'odd' placeholder row, and one 'even' placeholder row.
+2. Surround that table with the bracketed related-list code: above the table place [{{!<lineitems> <tableformat>] and below the table place [</tableformat> <listname>...</listname> <column>...</column> ... </lineitems>}}] - brackets are required around merge field, related list, and conditional logic syntax in DOCX templates.
+3. Do not put RENDER (conditional logic) tags on the same line as the LINEITEMS block.
+4. Stay within documented DOCX limits: an uploaded template supports at most 10 related lists, and complex related-list features such as using <td> cells as column prefixes are not supported in DOCX.
+5. For column-level control, S-Docs documents attributes in Advanced Template Features: <class>none</class> at the start of related list/SOQL code removes all table formatting; colspan, newrow, mergenext, prefix/postfix, and type=""rtf"" (preserve rich-text markup) are also available.
+6. If the table needs formatting DOCX cannot support, S-Docs recommends alternatives: build the document as a DOC template in the S-Docs template editor (better for complex related lists), or use a Component template that formats the data and merges into the final document."
+S-Docs output formats and compatibility with non-Microsoft editors,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/understanding-template-formats/choosing-template-formats/,"web-research seed 2026-07-16 (medium confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/creating-managing-templates/overview-template-formats/, https://kb.sdocs.com/knowledge-base/sdocs/understanding-template-formats/choosing-template-formats/",S-Docs,explainer,sdocs output formats doc docx pdf xls xlsx pptx csv html libreoffice openoffice writer compatibility non-microsoft editor generated documents,2026-07-17,case-mined:seed:libreoffice-support,"Problem
+Which document formats does S-Docs generate, and can the generated files be used with non-Microsoft editors such as LibreOffice Writer?
+
+Resolution
+1. S-Docs documents the following template output formats: PDF, DOC (Microsoft Word .doc, built in the S-Docs template editor, designed for post-generation editing), DOC-NEW (Word output with next-page section breaks), DOCX (built in Microsoft Word and uploaded), HTML (email output), XLS (Excel, ideal for large related lists; multiple sheets not supported), XLSX (built in Excel and uploaded; limited data merging, no related lists), PPTX (built in PowerPoint and uploaded), CSV (compatible with various spreadsheet programs), XML, JSON, Component (merged into other templates), and PDF-Upload.
+2. The generated Word/Excel/PowerPoint outputs are standard .doc/.docx/.xls/.xlsx/.pptx files.
+3. Important: the S-Docs knowledge base contains NO documented compatibility statements about LibreOffice, OpenOffice, or any non-Microsoft editor - all editor references are to Microsoft Word, Excel, and PowerPoint. S-Docs neither confirms nor denies LibreOffice support; opening generated files (or authoring upload templates) in LibreOffice is undocumented, so only Microsoft Office behavior is guaranteed by the documentation."
+How to access and use the S-Sign UI Translation page,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/ssign/install-configure-ssign/translate-the-s-sign-ui/,web-research seed 2026-07-16 (high confidence); sources: https://kb.sdocs.com/knowledge-base/ssign/install-configure-ssign/translate-the-s-sign-ui/,S-Sign,procedure,s-sign ui translation page language translate signer experience sdocs setup translateSSign SDConfig ssignParams SSIGN__Language__c,2026-07-17,case-mined:seed:ssign-ui-translation,"Problem
+You cannot find or access the S-Sign UI Translation page and want to translate or customize the language of the S-Sign user interface and signer experience.
+
+Cause
+The access path depends on the installed S-Docs version: from S-Docs 4.381+ the page is reached through S-Docs Setup, while older versions must use a direct Visualforce URL.
+
+Resolution
+1. On S-Docs 4.381 or later: click the App Launcher, type 'S-Docs Setup', open S-Docs Setup, scroll to the 'Translate UI' section, and click 'Go To S-Sign UI Translation Page'.
+2. On versions below 4.381: append /apex/SDOC__SDConfig?translateSSign=true to your salesforce.com domain URL to open the page directly.
+3. On the translation page, either pick an existing language and edit its translations, or type a new language name and click 'Define new translations for this language'; the English value appears on the left and you enter your translation on the right, then click Save.
+4. Alternatively, import a pre-built translation template (Spanish, German, French, Polish, Japanese) via the template migrator; these import with 'Available for Use' and 'Initially Visible' unchecked because they support only the UI experience, not document generation.
+5. To apply a translation to the signer experience, add ssignParams='language:<Language>' to your S-Docs button code (e.g. {!URLFOR('/apex/SDOC__SDCreate1', null,[id=Contact.Id, Object='Contact', ssignParams='language:Spanish'])}); for standard objects you must create a new S-Docs button because the managed button cannot be edited.
+6. For automation, set the S-Docs Job field 'SSign Language'; this sets the S-Sign Envelope Document field SSIGN__Language__c, which can be updated to change the Signer UI language in real time."
+Finding the latest S-Docs/S-Sign release and your installed version,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/installation/release-best-practices-how-to-install-s-docs-upgrades-seamlessly/,"web-research seed 2026-07-16 (high confidence); sources: https://www.sdocs.com/resources/release-notes, https://kb.sdocs.com/knowledge-base/sdocs/installation/release-best-practices-how-to-install-s-docs-upgrades-seamlessly/",,procedure,sdocs ssign latest version release notes upgrade appexchange installed packages version number sandbox rollback,2026-07-17,case-mined:seed:latest-release-info,"Problem
+What is the latest S-Docs / S-Sign release, where are the release notes, and how do you check which version is installed in an org?
+
+Resolution
+1. Release notes: the official index is https://www.sdocs.com/resources/release-notes, organized chronologically by season and year; click a release to see its features, enhancements, and fixes.
+2. Getting the latest version: the latest S-Docs release is always obtained from the Salesforce AppExchange listing - click 'Try It' to install in a sandbox or 'Get It Now' for production.
+3. Checking your installed version: in your Salesforce org go to Setup > Installed Packages and view the Version Number for the S-Docs (and S-Sign) packages.
+4. Upgrade best practices: always test the newest version in a sandbox before upgrading production; in production click 'Get It Now', select 'Install for Admins Only', then click 'Upgrade'.
+5. Warnings: do NOT uninstall your current version, and after upgrading you cannot roll back or downgrade to the previously installed version in any environment."
+Conditionally include or remove template sections with S-Docs RENDER,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/applying-logic/overview-conditional-logic/,"web-research seed 2026-07-16 (high confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/applying-logic/overview-conditional-logic/, https://kb.sdocs.com/knowledge-base/sdocs/applying-logic/insert-conditional-logic-button/",S-Docs,procedure,sdocs render endrender conditional logic hide remove section pdf template contains nested render1 doc-new section conditional,2026-07-17,case-mined:seed:conditional-sections,"Problem
+You want to conditionally remove sections of a generated document (e.g., a PDF) based on Salesforce record data, without maintaining separate templates.
+
+Resolution
+1. Wrap the content to show/hide in RENDER comment tags: <!--RENDER='condition' --> ...content... <!--ENDRENDER-->. If the condition evaluates to TRUE the entire block up to ENDRENDER is included in the generated document; otherwise it is omitted.
+2. Write conditions with merge fields and one of the eight comparators ==, !=, >, <, >=, <=, CONTAINS, NOT CONTAINS. Example: <!--RENDER='{{!Account.BillingState}}'== 'CA' --> ...California-only text... <!--ENDRENDER-->.
+3. For checkbox fields compare against the string 'True' (e.g. '{{!Contact.Checkbox__c}}'== 'True'); for non-string field types (rich text, textarea, longtext) add the render attribute to the merge field: {{!MyTestField render}}.
+4. Combine conditions with && (AND) and || (OR); for null-vs-not-null branching, create two complementary render blocks so exactly one is included.
+5. Nesting is supported up to 4 levels using RENDER, RENDER1, RENDER2, RENDER3 tags; nested render statements cannot skip levels.
+6. Structural rule: HTML tags must either fully enclose or be fully enclosed by the RENDER and ENDRENDER statements, and every RENDER must be paired with an ENDRENDER.
+7. In the S-Docs template editor you can use the Insert Conditional Logic button to generate the syntax.
+8. In DOC-NEW templates, each section has a Conditional Logic element: enter the same condition syntax (without the render tags) and the section is included only when it evaluates to true.
+9. In DOCX templates, RENDER tags cannot be on the same line as a LINEITEMS (related list) block."
+S-Docs permission sets: what each grants and which users need,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/administration/permission-sets/,"web-research seed 2026-07-16 (high confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/administration/permission-sets/, https://kb.sdocs.com/knowledge-base/sdocs/installation/sdocs-quick-install-configuration-guide-salesforce-lightning/",S-Docs,explainer,permission set SDocs User SDocs Administrator eSignature Requester Signer LWC Community User access generate documents template editor setup insufficient privileges,2026-07-17,case-mined:seed:sdocs-permission-sets-overview,"Problem
+Which S-Docs permission sets exist, what does each one grant, and which permission set do users need to generate documents, edit templates, or send e-signature requests?
+
+Resolution
+S-Docs is installed with several permission sets; assign them based on job function (S-Docs recommends starting users on a minimum-access profile and layering permission sets on top).
+1. SDocs User - for internal users; grants access to generate documents and insert S-Docs Jobs. Assign this to anyone who only needs to generate documents.
+2. SDocs Administrator - grants S-Docs access including the template editor and SDocs Setup. Assign this to admins who create/edit templates and configure S-Docs.
+3. S-Doc eSignature Requester - allows users to send e-signature requests in the S-Docs package.
+4. S-Doc eSignature Signer - assigned to the site guest user profile associated with the Experience Cloud site (external signing).
+5. SDocs LWC Community User - ensures Experience Cloud users can interact with the S-Docs Lightning Web Components.
+6. SDocs Jobs (Guest Users) - legacy; grants website guest users the ability to insert SDoc Jobs.
+7. S-Doc Site Guest User - deprecated.
+The S-Docs quick install guide instructs admins to assign the SDocs User or SDocs Administrator permission set to themselves and to every user who will interact with S-Docs. Note S-Sign has its own separate permission sets (see the S-Sign Permission Sets KB article)."
+S-Sign: populate signer emails dynamically with merge fields,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/ssign/create-and-manage-ssign-templates/s-sign-signer-profiles/,"web-research seed 2026-07-16 (high confidence); sources: https://kb.sdocs.com/knowledge-base/ssign/create-and-manage-ssign-templates/s-sign-signer-profiles/, https://www.sdocs.com/resources/release-notes/2022-07",S-Sign,procedure,S-Sign signer profile dynamic recipient email merge field PICKLIST billingcontact shippingcontact named query multiple signers e-signature,2026-07-17,case-mined:seed:dynamic-recipients-ssign,"Problem
+How do you configure S-Sign signer recipients dynamically so the signer email address is pulled from record data (merge fields) instead of being typed in manually?
+
+Resolution
+S-Sign signer recipients are configured via Signer Profiles on the S-Sign template, and the Email Address field supports merge fields for dynamic email selection.
+1. Open the S-Sign template's Signer Profile settings for the signer you want to configure.
+2. In the Email Address field, instead of typing a literal address, enter a merge field that resolves from the record the document is generated from, e.g. {{!Opportunity.email}} (syntax {{!ObjectType.fieldname}}).
+3. For shipping/billing contact selection at generation time, the Profile Name, Email Address, and Signer Name fields also support special contact merge fields such as {{!PICKLIST.billingcontact.email}} and {{!PICKLIST.shippingcontact.email}}. When the template includes these, the user is prompted to select contact records during generation, and the chosen contact's email is used for that signer.
+4. Constraints for the PICKLIST contact merge fields: the fields must also exist in the document body itself, and the template's Related To Type must be Opportunity or Account.
+5. Named Query merge fields can also be used to pull dynamic data from related or unrelated objects into S-Sign Template Settings, Signer Profile settings, and Field settings."
+"Using format-number in S-Docs, including on aggregate query results",web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/formatting-data/advanced-template-features/,"web-research seed 2026-07-16 (high confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/formatting-data/advanced-template-features/, https://kb.sdocs.com/knowledge-base/sdocs/related-lists-and-soql-queries/using-s-docs-direct-soql-for-related-list/, https://kb.sdocs.com/knowledge-base/sdocs/related-lists-and-soql-queries/the-named-query-feature/",S-Docs,procedure,format-number attribute syntax pattern merge field related list column aggregate query SUM alias Direct SOQL named query currency formatting decimals,2026-07-17,case-mined:seed:format-number-attribute,"Problem
+What is the correct syntax for the S-Docs format-number attribute, where does it apply, and how do you format numbers returned by SOQL aggregate queries (e.g. SUM) where it seems not to work?
+
+Resolution
+1. Merge field syntax: {{!Opportunity.amount format-number=""#,###.##""}} - returns the value formatted with commas and two decimals; without the attribute the raw stored value is returned. Documented patterns: #,###.## (currency with cents), #,### (comma-delimited whole number), #.### and #.###,## (EU formatting). Rounding is applied when precision exceeds the formatting pattern.
+2. Related list columns: format-number is also a column attribute, e.g. <column format-number=""#,###.##"" prefix=""$"">FieldName</column>.
+3. Aggregate queries (Direct SOQL related lists): alias each aggregate in the SOQL and format the alias column. Documented example: <soql>Select PricebookEntry.product2.name, sum(o.TotalPrice)tp, sum(o.Quantity)tq, o.PricebookEntryId From OpportunityLineItem o where opportunityid='{{!ObjectID15}}' group by pricebookentryid, PricebookEntry.product2.name</soql> with columns <column format-number=""#,###"" prefix=""$"">tq</column> and <column format-number=""#,###.##"" prefix=""$"">tp</column>. The column must reference the aggregate's alias (tp, tq), not the SUM() expression.
+4. Named Queries: aggregate results are referenced by alias in merge fields, and number formatting can be applied inline, e.g. SELECT COUNT(id) cid, SUM(Amount) asum FROM Opportunity referenced as {{!numAccounts.asum #,###.##}}.
+5. Merge-field formatting attributes (format-date, format-number, etc.) are supported for DOCX/PPTX output; there is no documented limitation that format-number fails on aggregate queries - the documented working pattern is alias-based as above."
+Inserting images into S-Docs HTML (email) templates,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/images/embed-static-images/,"web-research seed 2026-07-16 (high confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/images/embed-static-images/, https://kb.sdocs.com/knowledge-base/sdocs/understanding-template-formats/html-templates/",S-Docs,procedure,image HTML email template broken image base URL servlet ImageServer remote site setting static resource document public Enhanced Domains embed logo,2026-07-17,case-mined:seed:images-in-html-templates,"Problem
+How do you insert images into an S-Docs HTML/email template, and why do images that render fine internally appear broken for external email recipients?
+
+Resolution
+Supported methods for static images in S-Docs templates:
+1. Direct URL: <img src=""http://publicsite/imagename.png"" /> pointing at a publicly hosted image. If images stored outside of Salesforce are used directly in the template, you must create a Remote Site Setting to avoid broken links.
+2. Template editor Add Image button: inserts an image stored as a Salesforce Document. For external access the Document record must be publicly visible.
+3. Static resources: reference the image as /resource/STATIC_RESOURCE_API_NAME/PATH_TO_IMAGE.
+4. CSS background images/watermarks via background-image: url().
+HTML/email-specific gotchas:
+5. In HTML templates, images are not self-contained - the email only carries a link to the image, so display depends on the recipient being able to reach it.
+6. For an image to be visible to external recipients, append the full Salesforce base URL to the local path in the template source: e.g. change /servlet/servlet.ImageServer?id=015... to https://<yourinstance>.salesforce.com/servlet/servlet.ImageServer?id=015...
+7. Salesforce Enhanced Domains can break existing image URLs and the Insert Image button - recheck image URLs after enabling Enhanced Domains.
+8. For DOC templates, size images with a style attribute (style=""height: ...px; width: ...px;"") instead of height/width attributes, or images render as tiny squares."
+Controlling text wrapping in S-Docs template tables,web-researched-seed,update existing page,https://kb.sdocs.com/knowledge-base/sdocs/formatting-data/advanced-template-features/,"web-research seed 2026-07-16 (high confidence); sources: https://kb.sdocs.com/knowledge-base/sdocs/formatting-data/advanced-template-features/, https://kb.sdocs.com/knowledge-base/sdocs/understanding-template-formats/s-docs-limitations/",S-Docs,procedure,wrap text table column breakeverynchars word-wrap white-space PDF CSS 2.1 long URL overflow related list column width line break,2026-07-17,case-mined:seed:wrap-text-in-table,"Problem
+Text in an S-Docs table column does not wrap (long values or URLs overflow or stretch the column) - how do you force wrapping inside template tables?
+
+Cause
+PDF templates support CSS 2.1, and some CSS attributes such as word-wrap are CSS 3 and therefore not supported; long lines of text without break points like spaces or dashes (such as long URLs) can't be wrapped by the PDF rendering service.
+
+Resolution
+1. Use the documented breakeverynchars attribute, which inserts a line break after every N characters.
+2. On a merge field: {{!Opportunity.Long_Field__c breakeverynchars=""10""}}.
+3. On a related-list table column: <column breakeverynchars=""10"">Long_Line__c</column> inserts a line break after every 10 characters in that column.
+4. For PDF-Upload templates specifically, enable wrapping by adding white-space: normal!important; to the field's Additional Style.
+5. When styling tables, stick to CSS 2.1 properties in PDF templates, since CSS 3 properties like word-wrap are ignored."
+Hyperlinks in the S-Sign signing view,production-mined,author new page,,00026602,S-Sign,procedure,S-Docs S-Sign hyperlinks template editor anchor tag,2026-07-21,case-mined:seed:ssign-signing-view-hyperlinks,"Problem
+Unable to add hyperlinks in the S-Docs template editor or after generating an SDoc.
+
+Cause
+Salesforce removed this option from the editor in a recent update.
+
+Resolution
+1. Add an anchor tag ( ) in the source to include hyperlinks. 2. Note: A new Template Editor will be released in the first half of next year, restoring this functionality and introducing improvements."
+Edit invoice filename and add subtotals in templates,production-mined,author new page,,"00028503, 00027708, 00026346",S-Docs,procedure,Error uploading Quote Template 1.docx: Not enough rows specified in table between <tableformat></tableformat> tags invoice filename subtotal charge category template editor soql math tags,2026-07-21,case-mined:061d2feae7de,"Problem
+How to edit invoice filenames and add subtotals by charge category in templates.
+
+Resolution
+1. To auto-name generated documents, use the 'Attachment and file name format' field under the 'Document Options' tab in the template editor. 2. For subtotals by charge category, use the Advanced SOQL section to generate SUM totals in a SOQL query, or use math tags for merge fields."
+Fixing multiple Org-Wide email addresses in S-Docs template,production-mined,author new page,,"00028081, 00025742, 00024915",S-Docs,procedure,s-docs org-wide email template address issue,2026-07-21,case-mined:23bccd5cb3ba,"Problem
+S-Docs uses two company-wide email addresses despite one being defined in the template.
+
+Cause
+Two different Org-Wide email addresses are selected in the HTML and PDF templates.
+
+Resolution
+1. Set both the HTML and PDF templates to use the same Org-Wide email address. 2. Test the templates after making the changes."
+Lock specific section in S-Docs template,production-mined,author new page,,"00027684, 00025943",S-Docs,procedure,lock section paragraph S-Docs template non-editable Word DOCX,2026-07-21,case-mined:449d433267fa,"Problem
+Can S-Docs lock a specific paragraph/section in a contract template to make it non-editable?
+
+Cause
+S-Docs doesn't have the capability to lock a certain paragraph/section within a template.
+
+Resolution
+1. Use Microsoft Word to lock the desired paragraph/section. 2. Download the locked Word document to an S-Docs DOCX template."

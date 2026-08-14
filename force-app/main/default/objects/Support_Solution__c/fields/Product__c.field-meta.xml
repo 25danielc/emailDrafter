@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product__c</fullName>
+    <description>Product the solution applies to. Used by Retrieval as a pre-filter, fed from the triage 'topic' output (Case.Product_List__c). None = page is about neither product (internal/ops/HR); it forces Visibility__c=agent_only and never matches an S-Docs/S-Sign retrieval filter. A page genuinely about BOTH is not stored as a value here - the ingestion splitter fans it into one S-Docs and one S-Sign record.</description>
+    <externalId>false</externalId>
+    <label>Product</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>S-Docs</fullName>
+                <default>false</default>
+                <label>S-Docs</label>
+            </value>
+            <value>
+                <fullName>S-Sign</fullName>
+                <default>false</default>
+                <label>S-Sign</label>
+            </value>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <label>None</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

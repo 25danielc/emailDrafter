@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Solution_Type__c</fullName>
+    <description>FORMAT/INTENT axis (distinct from the Source_Type__c trust axis). Controls how Drafting uses the body: template/procedure = reproduce faithfully, fill placeholders, do not truncate; reference/explainer = synthesize, truncatable. Populated by an ingestion body heuristic (merge tokens, ac: macros, tables, step-lists) with a label override; default explainer so the safe failure mode is "synthesize" rather than "reproduce prose as a verbatim template".</description>
+    <externalId>false</externalId>
+    <label>Solution Type</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>template</fullName>
+                <default>false</default>
+                <label>template</label>
+            </value>
+            <value>
+                <fullName>procedure</fullName>
+                <default>false</default>
+                <label>procedure</label>
+            </value>
+            <value>
+                <fullName>reference</fullName>
+                <default>false</default>
+                <label>reference</label>
+            </value>
+            <value>
+                <fullName>explainer</fullName>
+                <default>true</default>
+                <label>explainer</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

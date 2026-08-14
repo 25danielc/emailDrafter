@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Source_Space_Key__c</fullName>
+    <description>PROVENANCE. Raw Confluence space key as fetched, stored unmodified. Not read on the draft path; consumed by the re-classification job to re-derive Visibility__c/Source_Type__c/Product__c when the space/label mapping changes, WITHOUT re-fetching all of Confluence. Also shown to the agent as source provenance.</description>
+    <externalId>false</externalId>
+    <label>Source Space Key</label>
+    <length>40</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

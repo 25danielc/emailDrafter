@@ -1,0 +1,71 @@
+caseNumber,stratum,label,verdict,bestDoc,note,flags
+00033788,model_declined,D,correct_decline,,doc-limit increase request; plan/billing action,
+00033763,model_declined,A3,correct_decline,How to: Generate various inputs using Component Templates,duplicate S-Sign inputs fix pooled but never surfaced,
+00033972,model_declined,D,correct_decline,,"AE handoff, no error text, org investigation",
+00033856,model_declined,C,correct_decline,,missing zqu_Quote__c object error; no known-error doc,
+00034170,model_declined,C,correct_decline,,DOCX-to-PDF conversion/fidelity not documented,
+00034063,model_declined,C,correct_decline,,invalid S-Sign license key causes not documented,
+00034176,model_declined,D,correct_decline,,REQUIRED_FIELD_MISSING symptom of undescribed failure; org access given,
+00034231,model_declined,C,correct_decline,,next-signer email template page absent from corpus,
+00033786,model_declined,A3,correct_decline,Error: Incorrect Format. First Argument in Date Arithmetic Should Be a Date,"exact-error doc pooled, never surfaced; multi-intent",multi_intent;thread_noise
+00033683,model_declined,D,correct_decline,,pricing breakdown request; probe reproduces only 0.16,distill_flip_suspected
+00033790,model_declined,C,correct_decline,,multi-template job-splitter limitation not documented,thread_noise;distill_flip_suspected
+00033886,model_declined,D,correct_decline,,internal provisioning thread,thread_noise
+00034079,model_declined,C,correct_decline,,no truncation/substring template attribute exists in docs,
+00033871,model_declined,A2,over_conservative,"Merge Fields With Microsoft Templates (DOCX, PPTX, XLSX)",DOCX merge syntax doc at rank 3 content 0.42; rank-1 was DOC/PDF-only table guide,
+00033957,model_declined,A2,correct_decline,How to: Resize Images from Fields,resize workaround at rank 9 content 0.37; rank-1 only lists engine limits,multi_intent
+00034166,model_declined,A1,over_conservative,I'm getting a Content is blocked error when clicking Generate S-Docs,rank-1 0.58 doc IS the iframe-block fix (LWS+CDN); model balked at surface mismatch,
+00034040,model_declined,D,correct_decline,,"encrypt-at-rest signing failure, errors only in screenshots",multi_intent
+00034110,model_declined,A1,over_conservative,First Step: Installing S-Docs,rank-1 0.50 install doc answers free-tier download blocker,
+00033971,near_floor,C,,,DOCX upload invalid-field-ID error not documented,
+00033801,near_floor,D,,,"daily job failures, errors in images, org access granted",thread_noise
+00033849,near_floor,C,,,SDTemplate__c sObject-type error (flow-created jobs) not documented,
+00033955,near_floor,C,,,SSTemplateEditor page-missing after sandbox install not documented,
+00034178,near_floor,D,,,license/entitlement activation request,thread_noise
+00033731,near_floor,D,,,document limit reached = entitlement action,
+00033825,near_floor,C,,,per-user generation reporting how-to absent (Usage Metrics LWC is org-wide only),
+00034106,near_floor,D,,,document limit reached = entitlement action,
+00034120,near_floor,D,,,"prod upgrade failure, no error text, needs org diagnosis",
+00033889,near_floor,C,,,JPG-in-PDF rendering limitation not documented,
+00034031,near_floor,D,,,intermittent email logging failure; screen-share requested,
+00034014,near_floor,C,,,GenerateDocumentInvocable null-object error not documented,
+00033821,near_floor,C,,,External Client Apps migration + Run As breakage not documented,thread_noise
+00034201,near_floor,C,,,per-user template error (FLS on custom fields) diagnosis not documented,
+00033941,near_floor,C,,,'Ending position out of bounds' SDTemplateController error not documented,
+00033942,near_floor,A2,,System.LimitException: Too many SOQL queries: 101 error when sending a document,exact-error doc pooled; eval scored case 0.43 (< floor); probe distill now ranks it 1 at 0.63,distill_flip_suspected
+00033952,near_floor,A2,,Job Splitters,'Regex too complicated' named in doc; rank 5 content 0.41 vs generic XLSX at rank 1,distill_flip_suspected
+00033686,near_floor,C,,,v8→v11 skip-version upgrade path not documented,thread_noise
+00033855,near_floor,D,,,org transfer/license renewal; error only in screenshot,distill_flip_suspected;thread_noise
+00034124,near_floor,D,,,document limit reached = billing action,
+00033734,near_floor,C,,,'Invalid type: ContentDistribution' install error (Content Deliveries) not documented,
+00034037,near_floor,C,,,UI-sort persistence into generated table not documented,
+00034175,near_floor,D,,,document limit on paid org; account/license state check,
+00033755,deep_low,B,,S-Doc Job Statuses,doc covers jobs stuck at 80% exactly; absent from pool — query terms eaten by boilerplate,
+00033718,deep_low,C,,,HubSpot-edition template access; catalog is Salesforce-only,
+00033862,deep_low,C,,,salutation driven by send-time recipient picklist; capability not documented,
+00034127,deep_low,D,,,Teams meeting invite only,thread_noise
+00034086,deep_low,D,,,auto-reply mail loop,thread_noise
+00033720,deep_low,A2,,How To: Configure the S-Docs Usage Metrics LWC on Home Page,"entitlement-usage doc at rank 1 but content 0.24 (semantic=0, lexical 0.32)",
+00034113,deep_low,C,,,S-Sign signing-view hyperlinks not documented,
+00034087,deep_low,D,,,auto-reply mail loop,thread_noise
+00034097,deep_low,D,,,auto-reply mail loop,thread_noise
+00034015,deep_low,D,,,Teams invite + disclaimer only,thread_noise
+00034020,deep_low,C,,,logo positioning technique not documented,
+00033791,deep_low,D,,,call transcription about PandaDoc (different vendor),
+00033876,deep_low,D,,,Substack marketing newsletter (spam),
+00034071,deep_low,C,,,sections orphaned by deleted signer profile not documented,thread_noise
+00033770,deep_low,D,,,Substack marketing newsletter (spam),
+00033806,drafted,,minor_edits,,,
+00033813,drafted,,not_sendable,,halluc: misdiagnosis: maps missing-field SOQL bug to stuck-error-flag fix | does not answer actual question,
+00033874,drafted,,minor_edits,,,
+00033969,drafted,,minor_edits,,,
+00034046,drafted,,regen_declined,,halluc: n/a | does not answer actual question,
+00033831,drafted,,sendable,,,
+00034039,drafted,,minor_edits,, | does not answer actual question,
+00034091,drafted,,minor_edits,,,
+00033850,drafted,,minor_edits,,halluc: root-cause overreach on unseen error | does not answer actual question,
+00034102,drafted,,minor_edits,,,
+00033847,drafted,,minor_edits,,,
+00033711,drafted,,minor_edits,,,
+00034179,drafted,,minor_edits,,halluc: speculative Data-Preparation explanation; omits splitter warning | does not answer actual question,
+00033797,drafted,,not_sendable,,halluc: how-to for a key the customer does not have; billing ask | does not answer actual question,

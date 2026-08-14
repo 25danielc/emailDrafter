@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Retrieval_Embedding_Model__c</fullName>
+    <description>aiplatform.ModelsAPI modelName used to embed the query for semantic re-rank. Must match the model used to generate Embedding__c at ingest (same model, comparable vector space). Blank falls back to the class default (sfdc_ai__DefaultOpenAITextEmbeddingAda_002, 1536-dim).</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Retrieval Embedding Model</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

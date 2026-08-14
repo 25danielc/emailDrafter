@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Retrieval_Query_Distill_Enabled__c</fullName>
+    <description>Master switch for resilient retrieval (SupportRetrievalService.retrieveResilient). When true, a first retrieval pass that comes back below Retrieval_Distill_Trigger_Score__c triggers ONE Models chat call that distils the raw case into a focused search query; retrieval re-runs on it and keeps whichever pass is stronger. Spends the extra call ONLY on cases that would otherwise miss the draft floor. Default false -> retrieveResilient behaves identically to retrieve (no extra callout). OPT-IN: leave off until the labeled eval shows the customer-phrasing gap closing without regressing other buckets.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Retrieval Query Distill Enabled</label>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

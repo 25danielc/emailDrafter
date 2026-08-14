@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Draft_Drafted_Conf_Floor__c</fullName>
+    <description>Minimum confidence for a DRAFTED outcome whose grounding check did NOT flag it weak. A draft is only produced after the retrieval score floor (Draft_Min_Top_Score__c) and the grounding check both pass, so a non-flagged draft is by definition a strong, grounded match - it should not read as LOW just because the model self-reported cautiously on routine configuration steps. Default MEDIUM. The model can still raise to HIGH; weak-grounding still caps at LOW; NO_DRAFT_* outcomes are unaffected. Set NONE to disable the floor (revert to the raw model/retrieval clamp).</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Draft Drafted Confidence Floor</label>
+    <length>8</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Retrieval_Cluster_Gap__c</fullName>
+    <description>Adaptive-selection cluster gap (0-1): selection stops at the first relative score drop of at least this size from the previous kept candidate (the natural gap ending the strong cluster). Larger = keep more docs past a dip. Default 0.30 in code.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Retrieval Cluster Gap</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

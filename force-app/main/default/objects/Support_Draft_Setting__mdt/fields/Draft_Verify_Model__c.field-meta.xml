@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Draft_Verify_Model__c</fullName>
+    <description>aiplatform.ModelsAPI modelName used for the second-model verification gate (Draft_Verify_Enabled__c). Deliberately a cheaper model than the drafting model - the gate only fires on cases that already reached a would-be draft. Blank falls back to the class default (sfdc_ai__DefaultOpenAIGPT4OmniMini). Point at the full drafting model if the cheaper judge proves unreliable.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Draft Verify Model</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

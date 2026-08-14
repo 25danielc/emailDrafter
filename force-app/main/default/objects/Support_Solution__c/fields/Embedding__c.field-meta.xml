@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Embedding__c</fullName>
+    <description>Optional. JSON-serialized embedding vector for cosine re-rank of the SOSL-narrowed pool (checklist section 3). Empty until embedding re-rank is built; included now to avoid a later schema change.</description>
+    <externalId>false</externalId>
+    <label>Embedding</label>
+    <length>131072</length>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

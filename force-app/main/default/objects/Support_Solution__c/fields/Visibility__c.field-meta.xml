@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Visibility__c</fullName>
+    <description>SAFETY GATE (deterministic, read BEFORE generation). customer_safe = eligible to draft to a customer; agent_only = internal reference, surfaced to the agent but never drafted; escalate_only = flip orchestration to the escalation branch, do not draft. Default agent_only: a forgotten/ambiguous classification costs recall (recoverable), never a leak. Seeded from space/label at ingestion; raw inputs kept in Source_Space_Key__c/Source_Labels__c so it can be re-derived without re-fetch.</description>
+    <externalId>false</externalId>
+    <label>Visibility</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>customer_safe</fullName>
+                <default>false</default>
+                <label>customer_safe</label>
+            </value>
+            <value>
+                <fullName>agent_only</fullName>
+                <default>true</default>
+                <label>agent_only</label>
+            </value>
+            <value>
+                <fullName>escalate_only</fullName>
+                <default>false</default>
+                <label>escalate_only</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

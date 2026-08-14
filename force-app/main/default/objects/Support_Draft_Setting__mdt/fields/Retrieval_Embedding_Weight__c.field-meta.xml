@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Retrieval_Embedding_Weight__c</fullName>
+    <description>Blend weight w for the semantic signal in the final score: score = (1-w)*lexical + w*semantic. 0 = lexical only, 1 = semantic only. Default 0.55. Only applies when a doc has an embedding and the query embed succeeded; otherwise the score is pure lexical.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Retrieval Embedding Weight</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

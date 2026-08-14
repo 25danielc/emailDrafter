@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Draft_Grounding_Enabled__c</fullName>
+    <description>Master switch for the deterministic sentence-overlap grounding/faithfulness check on a generated draft. Default true: a draft whose claims do not trace to the cited sources is blocked (NO_DRAFT_UNGROUNDED) or flagged. This is model-independent lexical overlap, not semantic entailment.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Draft Grounding Enabled</label>
+    <type>Checkbox</type>
+    <defaultValue>true</defaultValue>
+</CustomField>

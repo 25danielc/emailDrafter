@@ -1,0 +1,68 @@
+<template>
+    <lightning-quick-action-panel title="Review &amp; Send AI Draft">
+        <template lwc:if={loading}>
+            <div class="slds-is-relative slds-p-around_large">
+                <lightning-spinner alternative-text="Loading draft" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:if={error}>
+            <div class="slds-text-color_error slds-m-bottom_small" role="alert">{error}</div>
+        </template>
+
+        <template lwc:if={noDraft}>
+            <p>No draft reply email was found on this case. Drafts are only created when the AI
+                drafter finishes with status DRAFTED.</p>
+        </template>
+
+        <template lwc:if={hasDraft}>
+            <div class="slds-m-bottom_x-small">
+                <span class="slds-text-color_weak">From:</span> {draft.fromAddress}
+            </div>
+            <lightning-input
+                class="slds-m-bottom_x-small"
+                label="To"
+                value={to}
+                onchange={handleToChange}
+                required
+                field-level-help="One or more addresses, comma-separated"
+            ></lightning-input>
+            <lightning-input
+                class="slds-m-bottom_x-small"
+                label="Cc"
+                value={cc}
+                onchange={handleCcChange}
+                field-level-help="Optional; clear it to send without a Cc"
+            ></lightning-input>
+            <lightning-input
+                class="slds-m-bottom_x-small"
+                label="Subject"
+                value={subject}
+                onchange={handleSubjectChange}
+                required
+            ></lightning-input>
+            <lightning-input-rich-text
+                label="Reply body"
+                label-visible
+                value={body}
+                onchange={handleBodyChange}
+            ></lightning-input-rich-text>
+        </template>
+
+        <div slot="footer">
+            <lightning-button
+                label="Cancel"
+                onclick={handleCancel}
+                class="slds-m-right_x-small"
+            ></lightning-button>
+            <template lwc:if={hasDraft}>
+                <lightning-button
+                    variant="brand"
+                    label={sendLabel}
+                    disabled={sendDisabled}
+                    onclick={handleSend}
+                ></lightning-button>
+            </template>
+        </div>
+    </lightning-quick-action-panel>
+</template>

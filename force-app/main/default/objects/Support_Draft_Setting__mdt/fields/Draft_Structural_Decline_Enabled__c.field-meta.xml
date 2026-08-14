@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Draft_Structural_Decline_Enabled__c</fullName>
+    <description>Deterministic pre-decline for structurally unanswerable cases, decided BEFORE the metered generation call. Declines (NO_DRAFT_LOW_CONFIDENCE) when the case references a screenshot/attachment but its text carries no machine-matchable error evidence, or describes a previously-working setup breaking ("worked yesterday") with no error text and no platform-release mention. These were the dominant bad-draft family on unseen cohorts (2026-07-23): the gates let them through and the draft answers the general topic, not the customer's unseen error. Default false in code; the Default record turns it on.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Draft Structural Decline Enabled</label>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

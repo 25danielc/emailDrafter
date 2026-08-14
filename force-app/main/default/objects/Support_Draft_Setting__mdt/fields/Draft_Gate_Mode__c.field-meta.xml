@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Draft_Gate_Mode__c</fullName>
+    <description>How the three verification gates (grounding, claim check, LLM verify) treat a failed would-be draft. 'block' (the code default when blank) = failure returns a NO_DRAFT_* outcome (fail-closed). 'demote' = failure stamps a [NEEDS REVIEW] warning at the top of AI Draft Notes, forces LOW confidence, and still produces a DRAFTED outcome for human review — drafts are never auto-sent, so demote trades reviewer attention for coverage.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Draft Gate Mode</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

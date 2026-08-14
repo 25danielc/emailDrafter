@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Draft_Max_Retries__c</fullName>
+    <description>How many times drafting re-issues the generation call when it returns empty or throws (transient failures). 0 = single attempt, no retry. Synchronous Apex cannot sleep without burning CPU, so retries are bounded immediate re-issue. A parseable response (including a deliberate decline) is never retried. Default 2 in code.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Draft Max Retries</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

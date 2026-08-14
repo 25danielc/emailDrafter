@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Drafting_Model_Name__c</fullName>
+    <description>aiplatform.ModelsAPI modelName used for drafting (the stronger Trust-Boundary model). Change here to swap models without a code deploy. Blank falls back to the class default.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Drafting Model Name</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Retrieval_Embedding_Sim_Floor__c</fullName>
+    <description>Raw cosine value mapped to 0 when rescaling the semantic signal to [0,1]. ada-002 cosines compress into a high band (~0.70 for unrelated text), so a non-zero floor is required for the signal to discriminate. Default 0.70. Recalibrate from breakdown.semanticRaw against the eval set.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Retrieval Embedding Sim Floor</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

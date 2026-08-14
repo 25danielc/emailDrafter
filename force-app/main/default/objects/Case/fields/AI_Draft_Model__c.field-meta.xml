@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AI_Draft_Model__c</fullName>
+    <description>The Models API model that produced this draft (audit trail, checklist section 7), e.g. sfdc_ai__DefaultGPT4Omni. Lets a model-version change be correlated with draft quality.</description>
+    <externalId>false</externalId>
+    <label>AI Draft Model</label>
+    <length>80</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

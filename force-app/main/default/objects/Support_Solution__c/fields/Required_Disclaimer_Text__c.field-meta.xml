@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Disclaimer_Text__c</fullName>
+    <description>The verbatim language appended to the reply post-generation when Has_Required_Disclaimer__c is true. Must not be paraphrased or summarized by the model — it is added outside the generation call. Empty while the flag is true is a silent omission, so a validation rule blocks that combination.</description>
+    <externalId>false</externalId>
+    <label>Required Disclaimer Text</label>
+    <length>32768</length>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

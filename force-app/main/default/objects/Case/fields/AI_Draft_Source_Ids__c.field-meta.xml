@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AI_Draft_Source_Ids__c</fullName>
+    <description>Comma-separated Support_Solution__c Ids actually fed to the model for this draft (audit trail, checklist section 7). Capped at the Draft_Max_Solutions__c setting, so this stays short.</description>
+    <externalId>false</externalId>
+    <label>AI Draft Source Ids</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

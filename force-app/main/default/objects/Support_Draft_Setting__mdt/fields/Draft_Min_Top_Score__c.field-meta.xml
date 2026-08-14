@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Draft_Min_Top_Score__c</fullName>
+    <description>Retrieval-score floor for drafting (0-1). If the top retrieved solution scores below this, drafting is refused (NO_DRAFT_LOW_CONFIDENCE) before any model call, regardless of the model's self-reported confidence. Stops weak matches drafting on model optimism alone. Default 0.45 in code.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Draft Min Top Score</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

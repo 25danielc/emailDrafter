@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <label>Default</label>
+    <protected>false</protected>
+    <values>
+        <field>Retrieval_Tier2_Pool_Limit__c</field>
+        <value xsi:type="xsd:double">40</value>
+    </values>
+    <values>
+        <field>Retrieval_Max_Candidates__c</field>
+        <value xsi:type="xsd:double">5</value>
+    </values>
+    <values>
+        <field>Retrieval_Good_Match_Score__c</field>
+        <value xsi:type="xsd:double">0.45</value>
+    </values>
+    <values>
+        <field>Retrieval_Medium_Match_Score__c</field>
+        <value xsi:type="xsd:double">0.30</value>
+    </values>
+    <values>
+        <field>Drafting_Model_Name__c</field>
+        <value xsi:type="xsd:string">sfdc_ai__DefaultGPT4Omni</value>
+    </values>
+    <values>
+        <field>Draft_Max_Solutions__c</field>
+        <value xsi:type="xsd:double">5</value>
+    </values>
+    <values>
+        <field>Draft_Solution_Char_Limit__c</field>
+        <value xsi:type="xsd:double">1200</value>
+    </values>
+    <values>
+        <field>Retrieval_Embedding_Enabled__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Retrieval_Embedding_Model__c</field>
+        <value xsi:type="xsd:string">sfdc_ai__DefaultOpenAITextEmbeddingAda_002</value>
+    </values>
+    <values>
+        <field>Retrieval_Embedding_Weight__c</field>
+        <value xsi:type="xsd:double">0.55</value>
+    </values>
+    <values>
+        <field>Retrieval_Embedding_Sim_Floor__c</field>
+        <value xsi:type="xsd:double">0.76</value>
+    </values>
+    <values>
+        <field>Retrieval_Embedding_Sim_Ceil__c</field>
+        <value xsi:type="xsd:double">0.86</value>
+    </values>
+    <values>
+        <field>Draft_Max_Retries__c</field>
+        <value xsi:type="xsd:double">2</value>
+    </values>
+    <!-- 0.45 matches the live org (2026-07-22). The 07-20 plan proposed 0.50, but precision is now
+         enforced by the grounding/claims/verify gates, and 0.50 would silently drop the 0.45-0.50
+         band that retrieval already rates HIGH. -->
+    <values>
+        <field>Draft_Min_Top_Score__c</field>
+        <value xsi:type="xsd:double">0.45</value>
+    </values>
+    <!-- Matches the live org: demote mode keeps reviewable [NEEDS REVIEW] drafts flowing; the
+         2026-07-22 anti-hallucination code blocks fabrication/grounding failures regardless of mode. -->
+    <values>
+        <field>Draft_Gate_Mode__c</field>
+        <value xsi:type="xsd:string">demote</value>
+    </values>
+    <values>
+        <field>Draft_Grounding_Enabled__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Draft_Grounding_Min_Overlap__c</field>
+        <value xsi:type="xsd:double">0.5</value>
+    </values>
+    <values>
+        <field>Draft_Grounding_Block_Ratio__c</field>
+        <value xsi:type="xsd:double">0.34</value>
+    </values>
+    <!-- Precision gates on a would-be draft. Claim check is deterministic (no model call). The verify
+         gate adds one model call per drafted case; turn OFF if the Einstein Requests budget is not
+         approved. Both fail closed: on any uncertainty the draft is declined, not sent.
+         Verify model = full GPT-4o (not mini): the 2026-07-20 labeled-21 eval showed the mini judge too
+         lenient (62% precision, 5/10 FPs caught) while full GPT-4o caught 9/10 FPs (86% precision, 0
+         fabricated specifics). Cost: one GPT-4o call per would-be draft (~14/100 cases). Revert to
+         sfdc_ai__DefaultOpenAIGPT4OmniMini to trade precision for lower cost + higher draft recall. -->
+    <values>
+        <field>Draft_Claim_Check_Enabled__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Draft_Claim_Check_Max_Unverified__c</field>
+        <value xsi:type="xsd:double">0</value>
+    </values>
+    <values>
+        <field>Draft_Verify_Enabled__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <!-- Phase-1 precision levers (2026-07-23): structural pre-decline targets the dominant unseen-
+         cohort bad-draft family (screenshot-only errors, "worked yesterday" regressions) before the
+         metered call; its answerable-signal veto was widened same-day after the pinned smoke showed
+         the code-token-only version killing 4 good drafts.
+         Draft_Verify_Second_Vote__c is OFF: the pinned smoke measured 8/8 agreement between two
+         same-model verify samples (correlated, not independent), so the "double-decline blocks"
+         rule degenerated into the full flagged-channel re-block (blocked 4 good / 3 bad, and judge
+         noise on clean drafts became blocks). Keep the code; only re-enable with a decorrelated
+         second voter (different model or lens). -->
+    <values>
+        <field>Draft_Structural_Decline_Enabled__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Draft_Verify_Second_Vote__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Draft_Verify_Model__c</field>
+        <value xsi:type="xsd:string">sfdc_ai__DefaultGPT4Omni</value>
+    </values>
+    <values>
+        <field>Retrieval_Select_Abs_Floor__c</field>
+        <value xsi:type="xsd:double">0.20</value>
+    </values>
+    <values>
+        <field>Retrieval_Select_Rel_Frac__c</field>
+        <value xsi:type="xsd:double">0.60</value>
+    </values>
+    <values>
+        <field>Retrieval_Cluster_Gap__c</field>
+        <value xsi:type="xsd:double">0.30</value>
+    </values>
+    <values>
+        <field>Retrieval_Priority_Enabled__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <!-- Query distillation is a per-low-confidence-case metered call; turn OFF if the Einstein
+         Requests budget is not approved. -->
+    <values>
+        <field>Retrieval_Query_Distill_Enabled__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Retrieval_Query_Distill_Model__c</field>
+        <value xsi:type="xsd:string">sfdc_ai__DefaultGPT4Omni</value>
+    </values>
+    <values>
+        <field>Retrieval_Distill_Trigger_Score__c</field>
+        <value xsi:type="xsd:double">0.45</value>
+    </values>
+    <values>
+        <field>Retrieval_Lexical_Floor_Frac__c</field>
+        <value xsi:type="xsd:double">0.75</value>
+    </values>
+    <!-- Lowered from the 0.10 Apex fallback: the 2026-07-20 eval showed distilled recovery
+         passes (e.g. 00033821, 00033743) surfacing the correct doc but losing acceptance by
+         the margin. 0.05 accepts a modest-but-real distilled improvement. -->
+    <values>
+        <field>Retrieval_Distill_Accept_Margin__c</field>
+        <value xsi:type="xsd:double">0.05</value>
+    </values>
+    <!-- MUST be a VERIFIED Organization-Wide Email Address. The placeholder is deliberately
+         non-routable so an unconfigured org produces a visibly-wrong sender. -->
+    <values>
+        <field>Reply_From_Address__c</field>
+        <value xsi:type="xsd:string">support@example.com</value>
+    </values>
+    <values>
+        <field>Draft_Call_Offer_Text__c</field>
+        <value xsi:type="xsd:string">Happy to hop on a call if that&apos;s easier - I&apos;m generally available 9am-4pm ET, Monday through Thursday. Just let me know a couple of times that suit you and I&apos;ll get something on the calendar.</value>
+    </values>
+</CustomMetadata>

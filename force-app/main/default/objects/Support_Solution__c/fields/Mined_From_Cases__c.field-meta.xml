@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mined_From_Cases__c</fullName>
+    <description>Provenance for case-mined docs (Source_Space_Key__c = 'case-mined'): CSV of the CaseNumbers whose agent replies grounded this doc. Audit-only — intentionally NOT in the retrieval SOSL field list.</description>
+    <externalId>false</externalId>
+    <label>Mined From Cases</label>
+    <length>4000</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

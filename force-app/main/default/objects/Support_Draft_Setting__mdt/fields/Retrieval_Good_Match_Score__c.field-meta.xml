@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Retrieval_Good_Match_Score__c</fullName>
+    <description>The "no good match" threshold (0-1). Top candidate score at/above this counts as a good match; below it, retrieval reports no good match and the flow routes to a human.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Retrieval Good Match Score</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Has_Required_Disclaimer__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>When true, the orchestration appends Required_Disclaimer_Text__c to the reply AFTER generation, deterministically, so a "be concise" model instruction can never drop mandatory (e.g. S-Sign compliance) language. A validation rule enforces that the text is non-empty when this is true.</description>
+    <externalId>false</externalId>
+    <label>Has Required Disclaimer</label>
+    <type>Checkbox</type>
+</CustomField>

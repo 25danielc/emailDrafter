@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Retrieval_Query_Distill_Model__c</fullName>
+    <description>Models API model name used by retrieveResilient to distil a raw case into a search query. Any chat-capable Trust Layer model is fine (this is a cheap keyword-extraction call, not generation). Blank -> code default sfdc_ai__DefaultGPT4Omni. Only used when Retrieval_Query_Distill_Enabled__c is true.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Retrieval Query Distill Model</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

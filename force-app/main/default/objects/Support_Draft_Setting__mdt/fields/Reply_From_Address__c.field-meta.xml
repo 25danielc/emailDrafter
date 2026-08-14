@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reply_From_Address__c</fullName>
+    <description>Org-wide / verified email address used by Email-to-Case routing. Stamped onto the draft reply EmailMessage as BOTH FromAddress and ValidatedFromAddress. ValidatedFromAddress MUST match a verified Organization-Wide Email Address (or a verified address) or the eventual agent send fails. Change here to repoint the reply sender without a code deploy. Blank = no sender stamped (agent picks one in the composer).</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Reply From Address</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Draft_Verify_Second_Vote__c</fullName>
+    <description>Demote-mode refinement of the verify gate: when the first verification sample declines an uncorroborated draft, draw ONE more independent sample (one extra metered call on that minority of cases). Both samples affirmatively declining blocks the draft (NO_DRAFT_UNVERIFIED) instead of demoting it into the reviewer queue; a split vote or an unreachable second sample demotes as before. Measured rationale (2026-07-23 unseen cohorts): single-sample verify declines are wrong ~a third to half of the time, so one decline is reviewer-triage signal, but two independent declines are strong evidence the draft is bad. Fabrication corroboration and grounding blocks are unaffected. Default false in code; the Default record turns it on.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Draft Verify Second Vote</label>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

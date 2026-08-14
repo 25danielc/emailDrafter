@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Draft_Verify_Enabled__c</fullName>
+    <description>Master switch for the second-model verification gate. Default true: after a draft passes the score floor and grounding, one cheap model call (Draft_Verify_Model__c) must confirm the draft answers the customer's specific question using only claims supported by the cited sources. Fail closed - any non-approval, uncertainty, parse error, or callout failure declines with NO_DRAFT_UNVERIFIED. Turn OFF to disable the gate without a code deploy (e.g. if the Einstein Requests budget is not approved).</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Draft Verify Enabled</label>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

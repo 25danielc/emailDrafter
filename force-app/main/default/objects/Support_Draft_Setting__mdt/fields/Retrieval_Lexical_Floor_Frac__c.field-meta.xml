@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Retrieval_Lexical_Floor_Frac__c</fullName>
+    <description>Lexical floor on the content blend: content = max(blend, this * lexical). The blend is semantic-led (Retrieval_Embedding_Weight__c ~0.55), so a doc whose embedding sits at the ada-002 noise floor (raw cosine ~0.70-0.78 -> rescaled ~0) has its content dragged to ~(1-w)*lexical even with a STRONG lexical match - penalizing exactly the cross-vocabulary matches (customer symptom phrasing vs admin/schema doc vocabulary) that embeddings cannot bridge. The floor lets semantic ADD without SUBTRACTING below a strong lexical signal; a high-semantic doc (blend > lexical) is untouched. Default 0 = OFF = legacy blend byte-for-byte. Tuning range ~0.6-0.8; calibrate on the eval (too high re-inflates keyword-only matches).</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Retrieval Lexical Floor Frac</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

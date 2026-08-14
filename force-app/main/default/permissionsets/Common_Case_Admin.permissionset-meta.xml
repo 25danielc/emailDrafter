@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Common Case Admin</label>
+    <description>Field access for the common-case priority feature: the Support_Solution__c.Common_Case__c flag. Assign to the integration/admin user that runs ingest, retrieval, and the eval.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <fieldPermissions>
+        <field>Support_Solution__c.Common_Case__c</field>
+        <readable>true</readable>
+        <editable>true</editable>
+    </fieldPermissions>
+</PermissionSet>

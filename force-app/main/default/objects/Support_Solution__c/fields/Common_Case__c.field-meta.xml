@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Common_Case__c</fullName>
+    <description>True for the curated "most common support cases" seeded from the S-Docs case sheet. These docs are eligible for the retrieval priority layer (gate-then-weight) so a genuine match surfaces first. Priority NEVER pins blindly: the doc must still clear the semantic/lexical gate at query time. Set by SDocsCaseIngestionService; false for the help.sdocs doc corpus.</description>
+    <externalId>false</externalId>
+    <label>Common Case</label>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

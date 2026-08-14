@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Disclaimer_Text_Required_When_Flagged</fullName>
+    <active>true</active>
+    <description>Safety: if Has_Required_Disclaimer__c is true, Required_Disclaimer_Text__c must be non-empty. Otherwise the flag promises a mandatory disclaimer that does not exist, turning a guard into a silent omission.</description>
+    <errorConditionFormula>AND( Has_Required_Disclaimer__c , ISBLANK( Required_Disclaimer_Text__c ) )</errorConditionFormula>
+    <errorDisplayField>Required_Disclaimer_Text__c</errorDisplayField>
+    <errorMessage>Required Disclaimer Text cannot be blank when Has Required Disclaimer is checked.</errorMessage>
+</ValidationRule>

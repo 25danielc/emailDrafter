@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Draft_Claim_Check_Max_Unverified__c</fullName>
+    <description>Number of unverifiable concrete specifics tolerated before the claim check blocks a draft. Default 0 (zero-tolerance: any invented specific declines), per the hard "zero hallucinated specifics" requirement. Exists only to loosen deterministically if a benign false-decline pattern emerges in eval; keep at 0 unless a specific over-block is observed.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Draft Claim Check Max Unverified</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

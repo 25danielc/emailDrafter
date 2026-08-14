@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Retrieval_Distill_Accept_Margin__c</fullName>
+    <description>Outcome-based acceptance margin for the distillation second pass. The distiller is sampled (no temperature control), so a distilled pass replaces the deterministic first pass only when it reaches draftable strength (Retrieval_Distill_Trigger_Score__c) AND beats the first pass topScore by MORE than this margin. Lower = accept distilled recovery more readily (higher recall, more variance); higher = only accept a decisive improvement. Only used when Retrieval_Query_Distill_Enabled__c is true. Apex fallback when unset: 0.10.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Retrieval Distill Accept Margin</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

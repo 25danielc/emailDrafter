@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Source_Type__c</fullName>
+    <description>Trust tier the drafter weights by. Original label-convention ladder: canned &gt; tips &gt; unsorted; 'query' = ad hoc captured answer (excluded from drafting retrieval). AI-classifier values map onto the same ladder: official ~ canned (top), tribal ~ tips, draft / internal_ops ~ low trust, unsorted = unknown. SupportRetrievalService.trustWeight() must score the new values or they fall to the default weight.</description>
+    <externalId>false</externalId>
+    <label>Source Type</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>canned</fullName>
+                <default>false</default>
+                <label>canned</label>
+            </value>
+            <value>
+                <fullName>tips</fullName>
+                <default>false</default>
+                <label>tips</label>
+            </value>
+            <value>
+                <fullName>unsorted</fullName>
+                <default>true</default>
+                <label>unsorted</label>
+            </value>
+            <value>
+                <fullName>query</fullName>
+                <default>false</default>
+                <label>query</label>
+            </value>
+            <value>
+                <fullName>official</fullName>
+                <default>false</default>
+                <label>official</label>
+            </value>
+            <value>
+                <fullName>draft</fullName>
+                <default>false</default>
+                <label>draft</label>
+            </value>
+            <value>
+                <fullName>internal_ops</fullName>
+                <default>false</default>
+                <label>internal_ops</label>
+            </value>
+            <value>
+                <fullName>tribal</fullName>
+                <default>false</default>
+                <label>tribal</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

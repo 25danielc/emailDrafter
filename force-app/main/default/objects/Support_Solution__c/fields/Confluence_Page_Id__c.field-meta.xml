@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Confluence_Page_Id__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>Source page identifier. External Id + Unique so ingestion upserts are idempotent (re-runs update, never duplicate). Confluence used the numeric page id; the help.sdocs connector uses the page's URL path (e.g. s-sign/.../s-sign-with-pdf-upload), which can run ~150 chars - hence length 255. Field API name kept for backward compatibility.</description>
+    <externalId>true</externalId>
+    <label>Confluence Page Id</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>
